@@ -7,9 +7,9 @@ object sparksession {
     val ss = SparkSession.builder()
               .master("local[*]") 
              .appName("Demosparksession").getOrCreate()
-   val rdd1 = ss.sparkContext.textFile("F:\\MY_LEARNING\\SCALA\\ParentTeacherConf.csv") //RDD
+   val rdd1 = ss.sparkContext.textFile("dParentTeacherConf.csv") //RDD
    val df1 = ss.read.format("csv").load("F:\\MY_LEARNING\\SCALA\\ParentTeacherConf.csv") //DF
-   
+
     df1.write.parquet("parentteacher3.parquet")
    val parquetFileDF = ss.read.parquet("parentteacher3.parquet") //parquet
    parquetFileDF.createOrReplaceTempView("parquetFilesql3")
