@@ -42,7 +42,7 @@ object Olympix {
     val ctry_swim = rf_parq.filter(rf_parq("sport")==="Swimming").groupBy(rf_parq("country")).sum("total").orderBy(("sum(total)")) //working
   //  val df_ds = rf_parq.as[(String,Int,String,Int,String,Int,Int,Int,Int,Int)] //not working
     
-    val usa_total = rf_parq.filter(rf_parq("country")==="United States").groupBy(rf_parq("year")).sum("total")//working
+    val usa_total = rf_parq.filter(rf_parq("country")==="United States").groupBy(rf_parq("year")).sum("total")//working olypix
      usa_total.show()
    
      //ctry_swim.show()
