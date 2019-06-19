@@ -5,6 +5,8 @@ import org.apache.spark.sql.types.IntegerType
 import org.apache.spark.sql.types.StringType
 import org.apache.spark.sql.types.StructType
 import org.apache.spark.sql.RelationalGroupedDataset
+import org.apache.spark.sql.Row
+import org.apache.spark.sql.types.StructField
 
 object Olympix {
 
@@ -26,9 +28,22 @@ object Olympix {
       .add("bronze", IntegerType, true)
       .add("total", IntegerType, true)
 
+      val someData = Seq(Row(8, "bat"),Row(64, "mouse"), Row(-27, "horse"))
+      
+      
     case class olympix_data(athelete: String, age: Int, country: String, year: Int, date: String, sport: Int, gold: Int, silver: Int, bronze: Int, total: Int)
     //val raw_source1 = ss.read.format("json").schema(schema).option("header", "true").load("F:\\MY_LEARNING\\SCALA\\olympic.json")
-
+    
+    val someSchema = List(
+  StructField("number", IntegerType, true),
+  StructField("word", StringType, true)
+)
+    val someDF = ss.createDataFrame(
+    ss.sparkContext.parallelize(someData),
+    StructType(someSchema))
+    //someDF.printSchema()
+     someDF.show()
+    
     val raw_source1 = ss.read.format("json").option("header", "true").option("inferSchema", true) load ("F:\\MY_LEARNING\\SCALA\\olympic.json") //working
     //  val raw_source1 = ss.read.format("csv").option("header", "true").option("delimiter", ",").load("F:\\MY_LEARNING\\SCALA\\olympix_data_sample.csv")
     import ss.implicits._
@@ -45,7 +60,7 @@ object Olympix {
     //  val df_ds = rf_parq.as[(String,Int,String,Int,String,Int,Int,Int,Int,Int)] //not working
 
     val usa_total = rf_parq.filter(rf_parq("country") === "United States").groupBy(rf_parq("year")).sum("total") //working olypix
-    usa_total.show()
+  //  usa_total.show()
 
     //ctry_swim.show()
 
