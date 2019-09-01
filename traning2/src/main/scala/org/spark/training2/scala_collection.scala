@@ -10,7 +10,8 @@ object scala_collection {
     val rdd1=Map(1->"sankar",2->"hema",3->"jittu")
     
     val rdd2=rdd1+(4->"x")
-    val per_rdd = ss.sparkContext.parallelize(List(1,2,3,4))
+    val per_rdd = ss.sparkContext.parallelize(List(1,2,3,4,10))
+   val v = 10
     per_rdd.persist()
     import ss.implicits._
     val df1 = per_rdd.toDF()
@@ -19,7 +20,7 @@ object scala_collection {
     print(rdd4)
     rdd1.keys.foreach(println)   
     rdd2.values.foreach(println)
-  
+    
     val b_p_s = df1.rdd.getNumPartitions
     print("number of partitions before repartitions:", b_p_s)
     val a_p_s = df1.repartition(2).rdd.getNumPartitions
@@ -28,6 +29,11 @@ object scala_collection {
     print("\nnumber of partitions after coalesce:", a_c_p_s)
     
     //val a_p = df1.rdd.partitions.size
+    print("\nadding broadcast variable")
+    
+    val b_v = ss.sparkContext.broadcast(v)
+    val k = b_v.value
+    print(k)
     
 
   }
