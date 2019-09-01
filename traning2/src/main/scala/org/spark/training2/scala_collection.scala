@@ -33,7 +33,19 @@ object scala_collection {
     
     val b_v = ss.sparkContext.broadcast(v)
     val k = b_v.value
-    print(k)
+   // print(k)                      working for single value but not for list value
+    
+    val rdd_test = ss.sparkContext.parallelize(Seq((1, "Spark"), (2, "Databricks"), (3, "Notebook")))
+    print("rdd_test is :" + rdd_test.collect())
+  //  val df_test = rdd_test.toDF("Id", "Name")
+   // print("dataframe is :" + df_test.show() )
+    //val ds_test = df_test.as[(Int, String)]
+    //print("dataset is :" + ds_test.show() )
+    
+    
+    
+    
+    
     
 
   }
