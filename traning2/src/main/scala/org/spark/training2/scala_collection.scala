@@ -11,7 +11,7 @@ object scala_collection {
     
     val rdd2=rdd1+(4->"x")
     val per_rdd = ss.sparkContext.parallelize(List(1,2,3,4,10))
-   val v = 10
+    val v = 10
     per_rdd.persist()
     import ss.implicits._
     val df1 = per_rdd.toDF()
@@ -36,16 +36,21 @@ object scala_collection {
    // print(k)                      working for single value but not for list value
     
     val rdd_test = ss.sparkContext.parallelize(Seq((1, "Spark"), (2, "Databricks"), (3, "Notebook")))
-    print("rdd_test is :" + rdd_test.collect())
+   // print("rdd_test is :" + rdd_test.collect())
   //  val df_test = rdd_test.toDF("Id", "Name")
    // print("dataframe is :" + df_test.show() )
     //val ds_test = df_test.as[(Int, String)]
     //print("dataset is :" + ds_test.show() )
     
+     print("working for access specification and comments\n")
+     val name = "sankar"
+     val age = 33
+     print("Hello!! My name is:" + name + " and My age is: " + age )
+     print(s"\n Hello!! My name is:$name and My age is: $age")
+     print(f"\nHello!! My name is:$name%s and My age is:$age%d\n")
+     print(raw"Hello!! My name is:$name%s and My age is:$age%d")
     
-    
-    
-    
+     
     
 
   }
